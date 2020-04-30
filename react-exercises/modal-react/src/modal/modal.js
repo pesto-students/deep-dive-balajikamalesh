@@ -1,7 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './modal.css';
 
 export default (props) => {
+
+  useEffect(() => {
+    document.onkeydown = onKeyDown;
+  })
+
+  const onKeyDown = (event) => {
+    let modal = document.querySelector('.modal');
+    let focusableElementsString = `a[href], area[href], input:not([disabled]), button:not([disabled]), 
+                                    iframe, object, embed, [tabindex="0"], [contendeditable]`;
+
+    let focusableElements = modal.querySelectorAll(focusableElementsString);
+    focusableElements = Array.prototype.slice.call(focusableElements);
+
+    let firstElement = focusableElements[0];
+    let lastElement = focusableElements[focusableElements.length - 1];
+
+    if(!focusableElements.includes(document.activeElement)){
+      firstElement.focus();
+    }
+
+    if(event.keyCode === 9) {
+        if(event.shiftKey){
+          if(document.activeElement === firstElement ){
+              event.preventDefault();
+              lastElement.focus();
+          }
+        } else {
+          if(document.activeElement === lastElement ){
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+    }
+
+    if(event.keyCode === 27) {
+      props.onCancel();
+    }
+  }
+
   return(
     <div className="modal" role="modal" aria-labelledby="modal_title">
         <header className="modal-header">
