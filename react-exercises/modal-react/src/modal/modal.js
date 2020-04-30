@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import './modal.css';
 
 export default (props) => {
+
+  const [initiallyFocussedElement, setInitiallyFocussedElement] = useState(document.activeElement);
 
   useEffect(() => {
     document.onkeydown = onKeyDown;
@@ -11,33 +13,35 @@ export default (props) => {
     let modal = document.querySelector('.modal');
     let focusableElementsString = `a[href], area[href], input:not([disabled]), button:not([disabled]), 
                                     iframe, object, embed, [tabindex="0"], [contendeditable]`;
+    if(modal !== null){
+      let focusableElements = modal.querySelectorAll(focusableElementsString);
+      focusableElements = Array.prototype.slice.call(focusableElements);
 
-    let focusableElements = modal.querySelectorAll(focusableElementsString);
-    focusableElements = Array.prototype.slice.call(focusableElements);
+      let firstElement = focusableElements[0];
+      let lastElement = focusableElements[focusableElements.length - 1];
 
-    let firstElement = focusableElements[0];
-    let lastElement = focusableElements[focusableElements.length - 1];
+      if(!focusableElements.includes(document.activeElement)){
+        firstElement.focus();
+      }
 
-    if(!focusableElements.includes(document.activeElement)){
-      firstElement.focus();
-    }
-
-    if(event.keyCode === 9) {
-        if(event.shiftKey){
-          if(document.activeElement === firstElement ){
+      if(event.keyCode === 9) {
+          if(event.shiftKey){
+            if(document.activeElement === firstElement ){
+                event.preventDefault();
+                lastElement.focus();
+            }
+          } else {
+            if(document.activeElement === lastElement ){
               event.preventDefault();
-              lastElement.focus();
+              firstElement.focus();
+            }
           }
-        } else {
-          if(document.activeElement === lastElement ){
-            event.preventDefault();
-            firstElement.focus();
-          }
-        }
-    }
+      }
 
-    if(event.keyCode === 27) {
-      props.onCancel();
+      if(event.keyCode === 27) {
+        props.onCancel();
+        initiallyFocussedElement.focus();
+      }
     }
   }
 
