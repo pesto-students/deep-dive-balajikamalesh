@@ -12,7 +12,7 @@ function App() {
   }
 
   const redirect = () => {
-    navigate('/dashboard');
+    navigate('/dashboard', { state: { fromApp: true }});
   }
 
   return (
