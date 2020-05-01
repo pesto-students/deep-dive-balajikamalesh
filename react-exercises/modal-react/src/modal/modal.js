@@ -1,9 +1,58 @@
-import React, {useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './modal.css';
 
 export default (props) => {
+  let { title, 
+        isOpen, 
+        children, 
+        confirmActionName,
+        backDropClassName,
+        currentFocusedElement,
+        onCancel, 
+        onConfirm, 
+        onBackDropClick } = props;
 
-  const [initiallyFocussedElement, setInitiallyFocussedElement] = useState(document.activeElement);
+  if(isOpen === undefined){
+    isOpen = true;
+  }
+
+  if(title === undefined){
+    title = 'Default Title';
+  }
+
+  if(children === undefined){
+    children = `Pass HTML Attribute to the modal`;
+  }
+
+  if(backDropClassName === undefined){
+    backDropClassName = 'default-backdrop';
+  }
+
+  if(confirmActionName === undefined){
+    confirmActionName = 'OK';
+  }
+
+  if(currentFocusedElement === undefined){
+    currentFocusedElement = document.activeElement;
+  }
+
+  if(onCancel === undefined){
+    onCancel = () => {
+      window.location.reload();
+    }
+  }
+
+  if(onConfirm === undefined){
+    onConfirm = () => {
+      window.location.reload();
+    }
+  }
+
+  if(onBackDropClick === undefined){
+    onBackDropClick = () => {
+      window.location.reload();
+    }
+  }
 
   useEffect(() => {
     document.onkeydown = onKeyDown;
@@ -39,25 +88,34 @@ export default (props) => {
       }
 
       if(event.keyCode === 27) {
-        props.onCancel();
-        initiallyFocussedElement.focus();
+        onCancel();
+        currentFocusedElement.focus();
       }
     }
   }
 
-  return(
-    <div className="modal" role="modal" aria-labelledby="modal_title">
-        <header className="modal-header">
-            <a href="/" aria-label="Close" className="close" onClick={props.onCancel}/>
-            <h1 tabIndex="-1" id="modal_title">{props.title}</h1>
-        </header>
-        <section className="modal-content">
-            {props.children}
-        </section>
-        <section className="modal-actions">
-            <button className="button-action" onClick={props.onCancel}>Cancel</button>
-            <button className="button-action" onClick={props.onConfirm}>{props.confirmActionName}</button>
-        </section>
-    </div>
-  )
+  if (isOpen){
+    return(
+      <div>
+        <div className={backDropClassName} onClick={onBackDropClick}/>
+        <div className="modal" role="modal" aria-labelledby="modal_title">
+            <header className="modal-header">
+                <a href="/" aria-label="Close" className="close" onClick={onCancel}/>
+                <h1 tabIndex="-1" id="modal_title">{title}</h1>
+            </header>
+            <section className="modal-content">
+                {children}
+            </section>
+            <section className="modal-actions">
+                <button className="button-action" onClick={onCancel}>Cancel</button>
+                <button className="button-action" onClick={onConfirm}>{confirmActionName}</button>
+            </section>
+        </div>
+      </div>
+    )
+  } else {
+    return(
+      <div></div>
+    )
+  } 
 }

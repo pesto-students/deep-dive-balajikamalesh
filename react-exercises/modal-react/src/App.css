@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  text-align: end;
+  background-color: black;
 }
 
 .App-logo {
@@ -110,4 +111,13 @@
 }
 .close:after {
   transform: rotate(-45deg);
+}
+
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
 }

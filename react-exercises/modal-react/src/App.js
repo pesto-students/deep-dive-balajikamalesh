@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import Modal from './modal/modal';
-import Backdrop from './backdrop/backdrop';
 import './App.css';
 import { navigate } from '@reach/router';
 
 function App() {
   
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignupOpen, setIsSignupOpen] = useState(false);
-  const [isMyBioOpen, setIsMyBioOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState('');
 
   const close = () => {
-    setIsSignupOpen(false); 
-    setIsLoginOpen(false);
-    setIsMyBioOpen(false);
+    setActiveModal('');
   }
 
   const redirect = () => {
@@ -22,15 +17,18 @@ function App() {
 
   return (
     <div className="App">
-      {(isLoginOpen || isSignupOpen || isMyBioOpen) && <Backdrop onCancel={close}/>}
       
-      <button id="login" className="button" onClick={() => { setIsLoginOpen(!isLoginOpen); setIsSignupOpen(false); setIsMyBioOpen(false); }}>Login</button>
-      <button id="signup" className="button" onClick={() => { setIsSignupOpen(!isSignupOpen); setIsLoginOpen(false); setIsMyBioOpen(false); }}>Sign up</button>
-      <button id="mybio" className="button" onClick={() => { setIsMyBioOpen(!isMyBioOpen); setIsLoginOpen(false); setIsSignupOpen(false); }}>My Bio</button>
+      <button id="login" className="button" onClick={() => { setActiveModal('login') }}>Login</button>
+      <button id="signup" className="button" onClick={() => { setActiveModal('signup')}}>Sign up</button>
+      <button id="default" className="button" onClick={() => { setActiveModal('default')}}>Default</button>
 
-      {isLoginOpen && <Modal 
+      { activeModal === 'login' &&  
+                      <Modal 
+                      isOpen={activeModal === 'login'}
                       title="Login" 
-                      confirmActionName="Login" 
+                      confirmActionName="Login"
+                      backDropClassName="backdrop"
+                      onBackDropClick={close} 
                       onCancel={close}
                       onConfirm={redirect}>
                         <form>
@@ -49,9 +47,13 @@ function App() {
                         </form>
                       </Modal>}
 
-      {isSignupOpen && <Modal 
+      { activeModal === 'signup' &&
+                        <Modal 
+                        isOpen={activeModal === 'signup'}
                         title="Signup" 
                         confirmActionName="Sign Up" 
+                        backDropClassName="backdrop" 
+                        onBackDropClick={close}
                         onCancel={close} 
                         onConfirm={redirect}>
                         <form>
@@ -69,27 +71,11 @@ function App() {
                           </div>
                         </form>
                       </Modal>}
-
-      {isMyBioOpen && <Modal 
-                        title="My Bio" 
-                        confirmActionName="Add" 
-                        onCancel={close} 
-                        onConfirm={redirect}>
-                        <form>
-                          <div className="form-input">
-                            <label htmlFor="firstname">First Name</label>
-                            <input type="text" id="firstname" placeholder=""/>
-                          </div>
-                          <div className="form-input">
-                            <label htmlFor="lastname">Last Name</label>
-                            <input type="text" id="lastname" placeholder=""/>
-                          </div>
-                          <div className="form-input">
-                            <label htmlFor="dateofbirth">Date of Birth</label>
-                            <input type="date" id="dateofbirth" placeholder=""/>
-                          </div>
-                        </form>
-                      </Modal>}
+          
+        { activeModal === 'default' && 
+                            <Modal isOpen={activeModal === 'default'} 
+                                   onCancel={close}></Modal>
+        }
     </div>
   );
 }

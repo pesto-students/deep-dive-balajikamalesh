@@ -1,5 +1,26 @@
-img{
-  display:block;
-  width:100%; height:100%;
-  object-fit: cover;
+.dashboard{
+  background-color: black;
+  width: 100%;
+  height: 61px;
+  text-align: end;
+}
+
+.button {
+  background-color: gray;
+  margin: 10px;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: lighter;
+  border-radius: 2px;
+}
+
+.sidebar {
+  width: 200px;
+  height: 91.7vh;
+  background-color: grey;
 }
