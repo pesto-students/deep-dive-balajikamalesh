@@ -40,6 +40,20 @@
     background: rgba(0,0,0,0.6);
 }
 
+.button-action {
+    background-color: gray;
+    margin: 10px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: lighter;
+    border-radius: 2px;
+  }
+
 
 @media (min-width: 768px) {
     .modal{

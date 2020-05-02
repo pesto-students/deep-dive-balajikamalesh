@@ -7,6 +7,7 @@ export default (props) => {
         children, 
         confirmActionName,
         backDropClassName,
+        modalStyleClassName,
         currentFocusedElement,
         onCancel, 
         onConfirm, 
@@ -26,6 +27,14 @@ export default (props) => {
 
   if(backDropClassName === undefined){
     backDropClassName = 'default-backdrop';
+  }
+  
+  if(modalStyleClassName === undefined){
+    modalStyleClassName = {};
+    modalStyleClassName.modal = 'modal';
+    modalStyleClassName.modalHeader = 'modal-header';
+    modalStyleClassName.modalContent = 'modal-content';
+    modalStyleClassName.modalAction = 'modal-actions';
   }
 
   if(confirmActionName === undefined){
@@ -59,7 +68,7 @@ export default (props) => {
   })
 
   const onKeyDown = (event) => {
-    let modal = document.querySelector('.modal');
+    let modal = document.querySelector(`.${modalStyleClassName.modal}`);
     let focusableElementsString = `a[href], area[href], input:not([disabled]), button:not([disabled]), 
                                     iframe, object, embed, [tabindex="0"], [contendeditable]`;
     if(modal !== null){
@@ -98,15 +107,15 @@ export default (props) => {
     return(
       <div>
         <div className={backDropClassName} onClick={onBackDropClick}/>
-        <div className="modal" role="modal" aria-labelledby="modal_title">
-            <header className="modal-header">
+        <div className={modalStyleClassName.modal} role="modal" aria-labelledby="modal_title">
+            <header className={modalStyleClassName.modalHeader}>
                 <a href="/" aria-label="Close" className="close" onClick={onCancel}/>
                 <h1 tabIndex="-1" id="modal_title">{title}</h1>
             </header>
-            <section className="modal-content">
+            <section className={modalStyleClassName.modalContent}>
                 {children}
             </section>
-            <section className="modal-actions">
+            <section className={modalStyleClassName.modalAction}>
                 <button className="button-action" onClick={onCancel}>Cancel</button>
                 <button className="button-action" onClick={onConfirm}>{confirmActionName}</button>
             </section>

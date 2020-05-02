@@ -7,6 +7,13 @@ function App() {
   
   const [activeModal, setActiveModal] = useState('');
 
+  const myModalStyle = {
+    modal: 'modal1',
+    modalHeader: 'modal-header1',
+    modalContent: 'modal-content1',
+    modalAction: 'modal-actions1'
+  }
+
   const close = () => {
     setActiveModal('');
   }
@@ -53,6 +60,7 @@ function App() {
                         title="Signup" 
                         confirmActionName="Sign Up" 
                         backDropClassName="backdrop" 
+                        modalStyleClassName={myModalStyle}
                         onBackDropClick={close}
                         onCancel={close} 
                         onConfirm={redirect}>
