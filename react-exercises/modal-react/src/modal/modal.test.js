@@ -41,3 +41,19 @@ test('Modal with form render mode', () => {
     const linkElement1 = getByLabelText(/sample/i);
     expect(linkElement1).toBeInTheDocument();
   });
+
+  test('Modal with form, title render mode and confirmation button', () => {
+    const { getByText } = render(<Modal isOpen={true} title="sample" confirmActionName="Login"><form>
+            <div className="form-input">
+            <label htmlFor="username">Username</label>
+            <input type="text" id="username" placeholder=""/>
+            </div>
+            <div className="form-input">
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" placeholder=""/>
+            </div>
+        </form></Modal>)
+
+    const linkElement1 = getByText(/Login/i);
+    expect(linkElement1).toBeInTheDocument();
+  });
