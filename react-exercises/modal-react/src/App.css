@@ -1,0 +1,170 @@
+body {
+  background-image: url('./homepage.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.App {
+  text-align: end;
+  background-color: black;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form-input{
+  margin-bottom: 1rem;
+}
+
+.form-input label {
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.form-input label,
+.form-input input {
+  width: 100%;
+  display: block;
+}
+
+.form-input input[type='checkbox'] {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+}
+
+.button, 
+.button-action {
+  /* background-color: rgba(50,50,50); */
+  background-color: gray;
+  margin: 10px;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: lighter;
+  border-radius: 2px;
+}
+
+.button-action {
+  padding: 8px 20px;
+  font-size: 1rem;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  width: 30px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: white;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal1{
+  width: 60%;
+  background: rgb(236, 235, 218);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  position: fixed;
+  top: 20vh;
+  left: 5%;
+}
+
+.modal-header1{
+  padding: 1rem;
+  background: rgb(61, 105, 228);
+  color: rgba(255,255,255);
+  text-align: -webkit-center;
+}
+
+.modal-header1 h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+
+.modal-content1 {
+  padding: 1rem;
+  text-align: center;
+}
+
+.modal-actions1 {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .modal1{
+      width: 30rem;
+      left: calc((100% - 30rem) / 2);
+  }
+}
