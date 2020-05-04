@@ -31,7 +31,6 @@ function App() {
 
       { activeModal === 'login' &&  
                       <Modal 
-                      isOpen={activeModal === 'login'}
                       title="Login" 
                       confirmActionName="Login"
                       backDropClassName="backdrop"
@@ -56,7 +55,6 @@ function App() {
 
       { activeModal === 'signup' &&
                         <Modal 
-                        isOpen={activeModal === 'signup'}
                         title="Signup" 
                         confirmActionName="Sign Up" 
                         backDropClassName="backdrop" 
@@ -81,8 +79,7 @@ function App() {
                       </Modal>}
           
         { activeModal === 'default' && 
-                            <Modal isOpen={activeModal === 'default'} 
-                                   onCancel={close}></Modal>
+                            <Modal onCancel={close}></Modal>
         }
     </div>
   );

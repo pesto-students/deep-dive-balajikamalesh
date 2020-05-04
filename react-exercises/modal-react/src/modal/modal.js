@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import CONSTANTS from './constants';
 import './modal.css';
 
 export default (props) => {
   let { title, 
-        isOpen, 
         children, 
         confirmActionName,
         backDropClassName,
@@ -12,10 +12,6 @@ export default (props) => {
         onCancel, 
         onConfirm, 
         onBackDropClick } = props;
-
-  if(isOpen === undefined){
-    isOpen = true;
-  }
 
   if(title === undefined){
     title = 'Default Title';
@@ -64,25 +60,29 @@ export default (props) => {
   }
 
   useEffect(() => {
+    let modal = document.querySelector(`.${modalStyleClassName.modal}`);
+    let focusableElements = modal.querySelectorAll(CONSTANTS.FOCUSSABLE_ELEMENTS);
+    focusableElements[1].focus();
     document.onkeydown = onKeyDown;
   })
 
   const onKeyDown = (event) => {
-    let modal = document.querySelector(`.${modalStyleClassName.modal}`);
-    let focusableElementsString = `a[href], area[href], input:not([disabled]), button:not([disabled]), 
-                                    iframe, object, embed, [tabindex="0"], [contendeditable]`;
-    if(modal !== null){
-      let focusableElements = modal.querySelectorAll(focusableElementsString);
-      focusableElements = Array.prototype.slice.call(focusableElements);
 
+    let modal = document.querySelector(`.${modalStyleClassName.modal}`);
+    
+    if(modal !== null){
+
+      let focusableElements = modal.querySelectorAll(CONSTANTS.FOCUSSABLE_ELEMENTS);
+      focusableElements = Array.from(focusableElements);
+    
       let firstElement = focusableElements[0];
       let lastElement = focusableElements[focusableElements.length - 1];
-
+      
       if(!focusableElements.includes(document.activeElement)){
         firstElement.focus();
       }
 
-      if(event.keyCode === 9) {
+      if(event.keyCode === CONSTANTS.KEYCODE_TAB){
           if(event.shiftKey){
             if(document.activeElement === firstElement ){
                 event.preventDefault();
@@ -96,14 +96,13 @@ export default (props) => {
           }
       }
 
-      if(event.keyCode === 27) {
+      if(event.keyCode === CONSTANTS.KEYCODE_ESCAPE){
         onCancel();
         currentFocusedElement.focus();
       }
     }
   }
 
-  if (isOpen){
     return(
       <div>
         <div className={backDropClassName} onClick={onBackDropClick}/>
@@ -122,9 +121,4 @@ export default (props) => {
         </div>
       </div>
     )
-  } else {
-    return(
-      <div></div>
-    )
-  } 
 }
