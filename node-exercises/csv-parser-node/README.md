@@ -10,15 +10,15 @@ Aim is to write a package which converts CSV text input into arrays or objects. 
 
 ## Mandatory Features
 
-### 1. Follows the Node.js streaming API best practices.
+### 1. Follows the Node.js streaming API best practices. #needs clarification
   - Use async iterators and generators wherever you can.
 
-### 2. Parse CSV files
+### 2. Parse CSV files ##DONE
 
 ```js
 YOUR_API("path to localFile/remote files (if you can do)", { ...YOUR OPTIONS });
 ```
-### 3. Can convert JSON to CSV and vice-versa
+### 3. Can convert JSON to CSV and vice-versa ##1-DONE 2-PENDING
 ```js
 YOUR_API('JSON STRING') 
 //=> outputs CSV (via stream? or string?)
@@ -33,7 +33,7 @@ YOUR_API('CSV STRING')
 - Ask yourself one question: **Does the separator have to be only a comma? Can it be other characters?**
 
 
-## 5. Header row support
+## 5. Header row support ##DONE-NEEDS CLARIFICATION FOR JSON-CSV
 - There may be an OPTIONAL header line appearing as the first line of the file with the same format as normal records. This header will contain names corresponding to the fields in the file, and MUST contain the same number of fields as the records in the rest of the file.
 
 ```js
@@ -71,7 +71,7 @@ YOUR_API(`
 ### 6. Spaces are considered part of a field and MUST NOT be ignored
 
 
-### 7. You should give the ability to skip the default stream return value.
+### 7. You should give the ability to skip the default stream return value. ##NEEDS CLARFICATION
 - Perhaps by returning a promise that resolves with the entire output?
 - Or by taking a callback which is invoked when the task is complete?
 
