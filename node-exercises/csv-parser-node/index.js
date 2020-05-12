@@ -1,9 +1,6 @@
-const fs = require('fs');
-const fileTransformer = require('./fileconverter');
+const parser = require('./fileconverter');
 
-const src = fs.createReadStream('./sample.csv', { encoding: 'utf-8' });
-const dest = fs.createWriteStream('./sample.txt');
-
-src
-.pipe(fileTransformer({ UseHeader: true, Headers: header => header.map( column =>  column.toUpperCase() )}))
-.pipe(dest);
+parser.myParser('./sampleSmall.csv',{ UseHeader: false, 
+                                      transformHeader: header => header.map( column =>  column.toUpperCase()),
+                                      outputFile: './sample.txt',
+                                      logError: true });
