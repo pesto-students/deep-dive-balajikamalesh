@@ -1,0 +1,14 @@
+canvas{
+    margin: 5% 10% 5% 10%;
+    width: 60%;
+    background-color: gainsboro;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    display: inline;
+}
+
+#canvas-container {
+    width: 100%;
+    text-align:center;
+ }
+ 
