@@ -1,0 +1,15 @@
+{
+  "name": "mongo-odm",
+  "version": "1.0.0",
+  "description": "Add odm lib here",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "mongodb": "^3.5.7"
+  }
+}
