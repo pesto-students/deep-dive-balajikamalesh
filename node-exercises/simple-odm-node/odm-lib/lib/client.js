@@ -1,18 +1,50 @@
-const { isArray, isString, deepTraverse } = require('./utils');
 const MDBClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId;
-const isObject = require('mongodb').ObjectId; //require('../validate').isObject;
 
 class MongoClient {
   constructor(url, mongoClient) {
     this._mongoClient = mongoClient;
+    this.db = this._mongoClient.db();
   }
 
-  createCollection = (collectionName) => {
-    const db = this._mongoClient.db();
-    db.createCollection(collectionName, (error, result) => {
-      if (error) return reject(error);
-      return resolve(result);
+  get db() {
+    return this._db;
+  }
+
+  set db(value) {
+    this._db = value;
+  }
+
+  createCollection = async ({collectionName}) => {
+    return await this._db.createCollection(collectionName);
+  };
+
+  insertOne = async ({collectionName, doc}) => {
+    const collection = this._db.collection(collectionName);
+    return await collection.insertOne(doc);
+  };
+
+  replaceOne = async ({ collectionName,query, doc, config={} }) => {
+    const collection = this._db.collection(collectionName);
+    return await collection.replaceOne(query, doc, config);
+  };
+
+  findOne = async ({ collectionName,query, projection={} }) => {
+    const collection = this._db.collection(collectionName);
+    return await collection.findOne(query, projection);
+  };
+
+  deleteOne = async ({ collectionName,query, config={} }) => {
+    const collection = this._db.collection(collectionName);
+    return await collection.deleteOne(query, config);
+  };
+
+  close = () => {
+    return new Promise((resolve, reject) => {
+      console.log('closing DB connection');
+      this._mongoClient.close(function(error) {
+        if (error) return reject(error);
+        return resolve();
+      });
     });
   };
 
@@ -27,7 +59,11 @@ class MongoClient {
       });
     });
   }
+  
 }
 
 
+
 module.exports = MongoClient;
+
+
