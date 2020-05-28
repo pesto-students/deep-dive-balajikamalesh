@@ -1,0 +1,21 @@
+const isArray = (arr)=>{
+  return Array.isArray(arr)
+}
+
+const isString = (str)=>{
+  return typeof(srt) === 'string'
+}
+
+const deepTraverse = function(obj, func) {
+  for (let i in obj) {
+      func.apply(this, [i, obj[i], obj]);  
+      if (obj[i] !== null && typeof(obj[i]) == 'object') {
+          deepTraverse(obj[i], func);
+      }
+  }
+};
+
+
+module.exports = {
+  isArray,isString,deepTraverse
+}
