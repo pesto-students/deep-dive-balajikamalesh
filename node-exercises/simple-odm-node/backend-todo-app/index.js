@@ -1,5 +1,5 @@
 require('dotenv').config();
-const init = require('./modal')
+const init = require('./model')
 const { Schema, Connect } = require('../odm-lib');
 const SimpleServer = require('../simple-server-node');
 const baseController = require('./controller/base');
@@ -49,7 +49,9 @@ try {
       console.log('connected successfully to DB');
 
       // initialise model
-      init()
+       init()
+       .then()
+       .catch()
     })
     .catch((error) => {
       console.log(error);
