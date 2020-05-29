@@ -29,10 +29,10 @@ async function init() {
     // let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,});
 
     // replaceOne sample
-    // const query = { _id: '5ed02baae372152e8b0c627f' };
-    // const doc = { task: 'Run 1km daily', is_done: false };
-    // const config = { upsert: true };
-    // let result = await todoModel.replaceOne({ query, doc, config });
+    const query = { _id: '5ed02baae372152e8b0c627f' };
+    const doc = { task: 'Run 1km daily', is_done: false };
+    const config = { upsert: true };
+    let result = await todoModel.replaceOne({ query, doc, config });
 
     // findOne sample
     //  const query = { _id: '5ed02b1f68989c2e40e86437' };
@@ -45,9 +45,9 @@ async function init() {
     // let result = await todoModel.deleteOne({ query, config });
 
       // find sample
-     const query = {  };
+    //  const query = {  };
     //  const projection = {is_done:1}
-     let result = await todoModel.find({ query });
+    //  let result = await todoModel.find({ query });
 
 
     console.log(result);

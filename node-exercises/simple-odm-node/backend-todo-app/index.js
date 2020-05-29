@@ -2,7 +2,8 @@ require('dotenv').config();
 const init = require('./model')
 const { Schema, Connect } = require('../odm-lib');
 const SimpleServer = require('../simple-server-node');
-const {getTodo , createTodo} = require('./controller/todo');
+const { getTodo , createTodo } = require('./controller/todo/index');
+const { login, signup } = require('./controller/user/index');
 
 let db = null;
 let simpleServer = null;
@@ -31,8 +32,14 @@ try {
 
   simpleServer.route({
     method: 'POST',
-    path: '/user',
-    handler: createTodo
+    path: '/login',
+    handler: login
+  });
+
+  simpleServer.route({
+    method: 'POST',
+    path: '/signup',
+    handler: signup
   });
 
   simpleServer.start(8000);

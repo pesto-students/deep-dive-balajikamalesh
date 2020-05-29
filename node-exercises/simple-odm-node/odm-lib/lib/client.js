@@ -1,3 +1,4 @@
+//MongoDB client - main - create collection and basic queries
 const MDBClient = require('mongodb').MongoClient;
 
 class MongoClient {
