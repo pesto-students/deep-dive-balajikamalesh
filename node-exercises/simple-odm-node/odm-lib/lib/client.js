@@ -38,6 +38,11 @@ class MongoClient {
     return await collection.deleteOne(query, config);
   };
 
+  find = async({collectionName,query,})=> {
+    const collection = this._db.collection(collectionName);
+    return await collection.find(query).toArray();
+  };
+
   close = () => {
     return new Promise((resolve, reject) => {
       console.log('closing DB connection');

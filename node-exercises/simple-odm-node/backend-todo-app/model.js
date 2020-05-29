@@ -1,5 +1,7 @@
 const { Schema, Model } = require('../odm-lib');
 
+//type - Array , Object , Number , Date 
+
 const todoSchema = new Schema({
   task: { type: 'string', required: true,unique:true },
   is_done: { type: 'boolean', required: true, default: false }
@@ -24,7 +26,7 @@ async function init() {
     const todoModel = new Model('todo', todoSchema);
 
     // insertOne sample
-    let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,});
+    // let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,});
 
     // replaceOne sample
     // const query = { _id: '5ed02baae372152e8b0c627f' };
@@ -41,6 +43,12 @@ async function init() {
     // const query = { _id: '5ed02b1f68989c2e40e86437' };
     // const config = {};
     // let result = await todoModel.deleteOne({ query, config });
+
+      // find sample
+     const query = {  };
+    //  const projection = {is_done:1}
+     let result = await todoModel.find({ query });
+
 
     console.log(result);
     // console.log(todoModel.schema)
