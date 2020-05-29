@@ -59,7 +59,7 @@ class MongoClient {
       });
     });
   }
-  
+
 }
 
 
@@ -67,3 +67,49 @@ class MongoClient {
 module.exports = MongoClient;
 
 
+
+  /**
+   * Find documents
+   *
+   * @param {String} collection Collection's name
+   * @param {Object} query Query
+   * @param {Object} options
+   * @returns {Promise}
+   */
+  // find(collection, query, options) {
+  //   const that = this;
+  //   query = castQueryIds(query);
+  //   return new Promise(function(resolve, reject) {
+  //     const db = that._mongoClient.collection(collection);
+  //     let cursor = db.find(query);
+  //     if (options.sort && (isArray(options.sort) || isString(options.sort))) {
+  //       let sortOptions = {};
+  //       if (!isArray(options.sort)) {
+  //         options.sort = [options.sort];
+  //       }
+
+  //       options.sort.forEach(function(s) {
+  //         if (!_.isString(s)) return;
+
+  //         let sortOrder = 1;
+  //         if (s[0] === '-') {
+  //           sortOrder = -1;
+  //           s = s.substring(1);
+  //         }
+  //         sortOptions[s] = sortOrder;
+  //       });
+
+  //       cursor = cursor.sort(sortOptions);
+  //     }
+  //     if (typeof options.skip === 'number') {
+  //       cursor = cursor.skip(options.skip);
+  //     }
+  //     if (typeof options.limit === 'number') {
+  //       cursor = cursor.limit(options.limit);
+  //     }
+  //     cursor.toArray(function(error, docs) {
+  //       if (error) return reject(error);
+  //       return resolve(docs);
+  //     });
+  //   });
+  // }
