@@ -33,7 +33,10 @@ class Model {
   }
 
   async insertOne(doc) {
+
     // validate schema
+    // this._schema properties type should be similar to doc types
+
     
     // check _id exists in doc ,if yes , cast it to toObjectId()
     doc = castIds(doc);
@@ -67,8 +70,11 @@ class Model {
     return await mongoClient().deleteOne({ collectionName: this.collectionName, query, config });
   }
 
-  find() {
-    // await mongoClient().find(this.collectionName,query)
+  async find({query={}}) {
+      // validate schema
+    // check _id exists in doc ,if yes , cast it to toObjectId()
+    query = castIds(query);
+   return await mongoClient().find({collectionName: this.collectionName, query})
   }
 
   async preSaveHook() {
