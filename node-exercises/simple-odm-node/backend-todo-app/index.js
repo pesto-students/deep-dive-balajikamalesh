@@ -1,8 +1,8 @@
 require('dotenv').config();
-const init = require('./modal')
+const init = require('./model')
 const { Schema, Connect } = require('../odm-lib');
 const SimpleServer = require('../simple-server-node');
-const baseController = require('./controller/base');
+const {getTodo , createTodo} = require('./controller/todo');
 
 let db = null;
 let simpleServer = null;
@@ -17,28 +17,22 @@ try {
   // ROUTES
   simpleServer.route({
     method: 'GET',
-    path: '/api/v1/users',
+    path: '/todos',
     middlewares: [],
-    handler: baseController
+    handler: getTodo
   });
 
   simpleServer.route({
-    method: 'GET',
-    path: '/api/v1/user/:id/name/:username',
+    method: 'POST',
+    path: '/todo',
     middlewares: [],
-    handler: baseController
-  });
-
-  simpleServer.route({
-    method: 'GET',
-    path: '/file/:name',
-    handler: baseController
+    handler: createTodo
   });
 
   simpleServer.route({
     method: 'POST',
     path: '/user',
-    handler: baseController
+    handler: createTodo
   });
 
   simpleServer.start(8000);
@@ -49,7 +43,9 @@ try {
       console.log('connected successfully to DB');
 
       // initialise model
-      init()
+       init()
+       .then()
+       .catch()
     })
     .catch((error) => {
       console.log(error);

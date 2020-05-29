@@ -1,12 +1,13 @@
 
 class Schema {
   constructor(fieldsObj) {
-    console.log(fieldsObj)
+    this.fields = fieldsObj
   }
-  post = () => {
-  }
-  pre = () => {
-  }
+
+  // post = () => {
+  // }
+  // pre = () => {
+  // }
 }
 
 module.exports = { Schema }
