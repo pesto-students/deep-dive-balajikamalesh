@@ -1,19 +1,19 @@
-
 const mongoClient = require('./index').getClient;
-
+const { toObjectId, castIds } = require('./utils');
 class Model {
+
   constructor(collectionName, schema) {
-    this.collectionName = collectionName
-    this.schema = schema
-    this.createCollection()
+    this.collectionName = collectionName;
+    this.schema = schema;
+    this.createCollection();
   }
 
   get schema() {
-    return this._schema
+    return this._schema;
   }
 
   set schema(value) {
-    this._schema = value
+    this._schema = value;
   }
 
   get collectionName() {
@@ -25,16 +25,65 @@ class Model {
   }
 
   async createCollection() {
-    await mongoClient().createCollection(this.collectionName)
+    try {
+      return await mongoClient().createCollection({ collectionName: this.collectionName });
+    } catch (error) {
+      throw error;
+    }
   }
 
-  save() {
+  async insertOne(doc) {
+    // validate schema
+    
+    // check _id exists in doc ,if yes , cast it to toObjectId()
+    doc = castIds(doc);
 
+    await this.preSaveHook();
+
+    const { result } = await mongoClient().insertOne({ collectionName: this.collectionName, doc });
+
+    await this.postSaveHook();
+
+    return result;
   }
 
+  async replaceOne({ query, doc, config }) {
+    // validate schema
+    // check _id exists in doc ,if yes , cast it to toObjectId()
+    query = castIds(query);
+    doc = castIds(doc);
+    return await mongoClient().replaceOne({ collectionName: this.collectionName, query, doc, config });
+  }
 
+  async findOne({ query, projection = {} }) {
+    // check _id exists in doc ,if yes , cast it to toObjectId()
+    query = castIds(query);
+    return await mongoClient().findOne({ collectionName: this.collectionName, query, projection });
+  }
+
+  async deleteOne({ query, config }) {
+    // check _id exists in doc ,if yes , cast it to toObjectId()
+    query = castIds(query);
+    return await mongoClient().deleteOne({ collectionName: this.collectionName, query, config });
+  }
+
+  find() {
+    // await mongoClient().find(this.collectionName,query)
+  }
+
+  async preSaveHook() {
+    if (this._schema.hasOwnProperty('preSave')) {
+      return await this._schema.preSave();
+    }
+  }
+
+  async postSaveHook() {
+    if (this._schema.hasOwnProperty('postSave')) {
+      return await this._schema.postSave();
+    }
+  }
 }
 
 module.exports = {
   Model
-}
+};
