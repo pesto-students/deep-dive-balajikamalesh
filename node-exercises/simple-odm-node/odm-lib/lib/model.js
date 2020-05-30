@@ -1,5 +1,5 @@
 const mongoClient = require('./index').getClient;
-const { toObjectId, castIds } = require('./utils');
+const { toObjectId, castIds , validateSchema } = require('./utils');
 class Model {
 
   constructor(collectionName, schema) {
