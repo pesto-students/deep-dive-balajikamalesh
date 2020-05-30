@@ -6,7 +6,7 @@ const { Schema, Model } = require('../../odm-lib');
 const todoSchema = new Schema({
   task: { type: 'string', required: true,default:"start running" },
   is_done: { type: 'boolean', required: true, default: false },
-  created_at:{ type:'date', required: true, default:Date.now() }
+  created_at:{ type:'date', required: true, default: new Date().toISOString() }
 });
 
 todoSchema.postSave = function() {

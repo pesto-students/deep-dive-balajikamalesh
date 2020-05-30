@@ -5,7 +5,7 @@ const { Schema, Model } = require('../odm-lib');
 const todoSchema = new Schema({
   task: { type: 'string', required: true,default:"start running" },
   is_done: { type: 'boolean', required: true, default: false },
-  created_at:{ type:'date', required: true, default:Date.now() }
+  created_at:{ type:'date', required: true, default: new Date().toISOString() }
 });
 
 todoSchema.postSave = function() {
@@ -27,7 +27,7 @@ async function init() {
     const todoModel = new Model('todo', todoSchema);
 
     // insertOne sample
-    let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,created_at:Date.now()});
+    let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,created_at: new Date().toISOString()});
 
     // replaceOne sample
     // const query = { _id: '5ed02baae372152e8b0c627f' };
