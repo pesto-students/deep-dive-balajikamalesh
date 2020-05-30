@@ -1,33 +1,38 @@
 const { Schema, Model } = require('../odm-lib');
 
-//type - Array , Object , Number , Date 
+//type - Array , Object , Number , Date
 
 const todoSchema = new Schema({
-  task: { type: 'string', required: true,default:"start running" },
+  task: { type: 'string', required: true, default: 'start running' },
   is_done: { type: 'boolean', required: true, default: false },
-  created_at:{ type:'date', required: true, default: new Date().toISOString() }
+  created_at: { type: 'date', required: true, default: new Date().toISOString() }
 });
 
 todoSchema.postSave = function() {
   console.log('post');
-  return true
+  return true;
 };
 
 todoSchema.preSave = function() {
   return new Promise((resolve, reject) => {
-    setTimeout(()=>{
-      console.log("pre")
-      resolve('pre')
-    },2000)
-  })
+    setTimeout(() => {
+      console.log('pre');
+      resolve('pre');
+    }, 2000);
+  });
 };
+
+const userSchema = new Schema({
+  username: { type: 'string', required: true, default: 'user' },
+  password: { type: 'string', required: true, default: '123' }
+});
 
 async function init() {
   try {
     const todoModel = new Model('todo', todoSchema);
 
     // insertOne sample
-    let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,created_at: new Date().toISOString()});
+    // let result = await todoModel.insertOne({ task: 'Buy grocery', is_done: false,created_at: new Date().toISOString()});
 
     // replaceOne sample
     // const query = { _id: '5ed02baae372152e8b0c627f' };
@@ -50,6 +55,17 @@ async function init() {
     //  const projection = {is_done:1}
     //  let result = await todoModel.find({ query });
 
+    const userModel = new Model('user', userSchema);
+
+    // findOne sample
+    const query = {
+      username: 'balajikamalesh',
+      password: 'balajikamal'
+    };
+
+    const projection = {};
+
+    let result = await userModel.find({ query });
 
     console.log(result);
     // console.log(todoModel.schema)

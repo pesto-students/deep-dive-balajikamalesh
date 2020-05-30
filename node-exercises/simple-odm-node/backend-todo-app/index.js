@@ -1,8 +1,8 @@
 require('dotenv').config();
-const init = require('./model')
-const {  Connect } = require('../odm-lib');
+const init = require('./sample');
+const { Connect } = require('../odm-lib');
 const SimpleServer = require('../simple-server-node');
-const { getTodo , createTodo } = require('./controller/todo/index');
+const { getTodo, createTodo } = require('./controller/todo/index');
 const { login, signUp } = require('./controller/user/index');
 
 let db = null;
@@ -50,17 +50,14 @@ try {
       console.log('connected successfully to DB');
 
       // initialise model
-       init()
-       .then()
-       .catch()
+      init().then((result) => console.log(result)).catch((err) => console.log(err));
     })
     .catch((error) => {
       console.log(error);
     });
-
 } catch (error) {
   console.log(error);
-} 
+}
 
 function cleanup() {
   console.log('cleaning up...');

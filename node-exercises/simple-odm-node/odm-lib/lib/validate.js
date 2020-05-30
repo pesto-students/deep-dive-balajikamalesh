@@ -42,40 +42,13 @@ const isType = function(value, type) {
   }
 };
 
-const isValidType = function(value, type) {
-  if (value === null) return true;
 
-  if (value === undefined) return true;
-
-  if (type === Array || isArray(type)) {
-    if (isArray(type) && type.length > 1) {
-      throw new Error('Unsupported type. Only one type can be specified in arrays, but multiple found:', +type);
-    }
-
-    if (isArray(type) && type.length === 1 && isArray(value)) {
-      let arrayType = type[0];
-      for (let i = 0; i < value.length; i++) {
-        let v = value[i];
-        if (!isType(v, arrayType)) {
-          return false;
-        }
-      }
-    } else if (isArray(type) && type.length === 0 && !isArray(value)) {
-      return false;
-    } else if (type === Array && !isArray(value)) {
-      return false;
-    }
-
-    return true;
-  }
-
-  return isType(value, type);
-};
 
 exports.isString = isString;
 exports.isNumber = isNumber;
 exports.isBoolean = isBoolean;
 exports.isObject = isObject;
 exports.isArray = isArray;
+exports.isDate = isDate;
 exports.isType = isType;
-exports.isValidType = isValidType;
+
