@@ -54,11 +54,21 @@ const validateSchema = function(schemaFields, object) {
   }
 }
 
+const setDefaults = function(schemaFields, object) {
+  for(let column in schemaFields){
+    if(object[column] !== undefined && schemaFields[column].required && schemaFields[column].default){
+        object[column] = schemaFields[column].default;
+    }
+  }
+  return object;
+}
+
 module.exports = {
   isArray,
   isString,
   deepTraverse,
   toObjectId,
   castIds,
-  validateSchema
+  validateSchema,
+  setDefaults
 };

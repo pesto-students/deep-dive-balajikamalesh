@@ -3,8 +3,8 @@ const { Schema, Model } = require('../../odm-lib');
 //type - Array , Object , Number , Date 
 
 const userSchema = new Schema({
-  task: { type: 'string', required: true,default:"start running" },
-  is_done: { type: 'boolean', required: true, default: false },
+  username: { type: 'string', required: true, default: "user" },
+  password: { type: 'string', required: true, default: "123" },
 });
 
 userSchema.postSave = function() {
@@ -24,47 +24,8 @@ userSchema.preSave = function() {
 let userModel = null;
 
 function User() {
-   userModel ? userModel : userModel = new Model('todo', todoSchema);
-   return userModel
+   userModel ? userModel : userModel = new Model('user', todoSchema);
+   return userModel;
 }
 
 module.exports = { User };
-
-
-// async function init() {
-//   try {
-//     const todoModel = 
-
-//     // insertOne sample
-//     // let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,});
-
-//     // replaceOne sample
-//     // const query = { _id: '5ed02baae372152e8b0c627f' };
-//     // const doc = { task: 'Run 1km daily', is_done: false };
-//     // const config = { upsert: true };
-//     // let result = await todoModel.replaceOne({ query, doc, config });
-
-//     // findOne sample
-//     //  const query = { _id: '5ed02b1f68989c2e40e86437' };
-//     //  const projection = {is_done:1}
-//     //  let result = await todoModel.findOne({ query ,projection });
-
-//     // deleteOne sample
-//     // const query = { _id: '5ed02b1f68989c2e40e86437' };
-//     // const config = {};
-//     // let result = await todoModel.deleteOne({ query, config });
-
-//       // find sample
-//      const query = {  };
-//      const projection = {is_done:1}
-//      let result = await todoModel.find({ query });
-
-
-//     console.log(result);
-//     // console.log(todoModel.schema)
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// module.exports = init;

@@ -1,5 +1,5 @@
 const mongoClient = require('./index').getClient;
-const { castIds, validateSchema } = require('./utils');
+const { toObjectId, castIds, validateSchema, setDefaults } = require('./utils');
 class Model {
   constructor(collectionName, schema) {
     this.collectionName = collectionName;
@@ -36,6 +36,7 @@ class Model {
     validateSchema(this._schema.fields, doc);
     // check _id exists in doc ,if yes , cast it to toObjectId()
     doc = castIds(doc);
+    doc = setDefaults(doc);
     await this.preSaveHook();
     const { result } = await mongoClient().insertOne({ collectionName: this.collectionName, doc });
     await this.postSaveHook();
@@ -48,6 +49,7 @@ class Model {
     // check _id exists in doc ,if yes , cast it to toObjectId()
     query = castIds(query);
     doc = castIds(doc);
+    doc = setDefaults(doc);
     return await mongoClient().replaceOne({ collectionName: this.collectionName, query, doc, config });
   }
 
