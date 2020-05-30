@@ -45,7 +45,7 @@ const castIds = function(query) {
 
 const validateSchema = function(schemaFields, object) {
   for(let column in schemaFields){
-    let isValidField = schemaFields[column].required 
+    let isValidField = (schemaFields[column].required ? schemaFields[column].required : true) 
                        && object[column] !== undefined 
                        && isType(object[column],schemaFields[column].type);
     if(!isValidField) {
@@ -56,7 +56,7 @@ const validateSchema = function(schemaFields, object) {
 
 const setDefaults = function(schemaFields, object) {
   for(let column in schemaFields){
-    if(object[column] !== undefined && schemaFields[column].required && schemaFields[column].default){
+    if(object[column] === undefined && schemaFields[column].required && schemaFields[column].default){
         object[column] = schemaFields[column].default;
     }
   }
