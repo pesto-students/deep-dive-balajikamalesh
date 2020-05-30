@@ -1,9 +1,11 @@
 const { Todo } = require('../../models');
 
 async function createTodo ({ request, response }) {
-  //if id supplied return only one todo
-  //else return all
-  response.json({ status: 200, result: 'OK' });
+  let todo = {};
+  todo.task = request.body.task;
+  todo.is_done = request.body.is_done == 'true';
+  const result = await Todo().insertOne(todo);
+  response.json({ status: 200, result });
 }
 
 

@@ -1,7 +1,6 @@
 const mongoClient = require('./index').getClient;
-const { toObjectId, castIds , validateSchema } = require('./utils');
+const { toObjectId, castIds, validateSchema, setDefaults } = require('./utils');
 class Model {
-
   constructor(collectionName, schema) {
     this.collectionName = collectionName;
     this.schema = schema;
@@ -33,11 +32,11 @@ class Model {
   }
 
   async insertOne(doc) {
-
     // validate schema
-    validateSchema(this._schema.fields,doc);
+    validateSchema(this._schema.fields, doc);
     // check _id exists in doc ,if yes , cast it to toObjectId()
     doc = castIds(doc);
+    doc = setDefaults(this._schema.fields, doc);
     await this.preSaveHook();
     const { result } = await mongoClient().insertOne({ collectionName: this.collectionName, doc });
     await this.postSaveHook();
@@ -46,10 +45,11 @@ class Model {
 
   async replaceOne({ query, doc, config }) {
     // validate schema
-    validateSchema(this._schema.fields,doc);
+    validateSchema(this._schema.fields, doc);
     // check _id exists in doc ,if yes , cast it to toObjectId()
     query = castIds(query);
     doc = castIds(doc);
+    doc = setDefaults(this._schema.fields, doc);
     return await mongoClient().replaceOne({ collectionName: this.collectionName, query, doc, config });
   }
 
@@ -65,11 +65,10 @@ class Model {
     return await mongoClient().deleteOne({ collectionName: this.collectionName, query, config });
   }
 
-  async find({query={}}) {
-      // validate schema
+  async find({ query = {} }) {
     // check _id exists in doc ,if yes , cast it to toObjectId()
     query = castIds(query);
-   return await mongoClient().find({collectionName: this.collectionName, query})
+    return await mongoClient().find({ collectionName: this.collectionName, query });
   }
 
   async preSaveHook() {

@@ -16,21 +16,27 @@ const isObject = (obj) => {
   return obj != null && obj.constructor.name === 'Object';
 };
 
+const isDate = (date) => {
+  return true;
+};
+
 const isArray = function(a) {
   return Array.isArray(a);
 };
 
 const isType = function(value, type) {
-  if (type === "string") {
+  if (type === 'string') {
     return isString(value);
-  } else if (type === "number") {
+  } else if (type === 'number') {
     return isNumber(value);
-  } else if (type === "boolean") {
+  } else if (type === 'boolean') {
     return isBoolean(value);
-  } else if (type === "array" || isArray(type)) {
+  } else if (type === 'array' || isArray(type)) {
     return isArray(value);
-  } else if (type === "object") {
+  } else if (type === 'object' ) {
     return isObject(value);
+  } else if ( type === 'date') {
+    return isDate(value);
   } else {
     throw new Error('Unsupported type: ' + type.name);
   }
