@@ -1,9 +1,9 @@
 require('dotenv').config();
 const init = require('./model')
-const { Schema, Connect } = require('../odm-lib');
+const {  Connect } = require('../odm-lib');
 const SimpleServer = require('../simple-server-node');
 const { getTodo , createTodo } = require('./controller/todo/index');
-const { login, signup } = require('./controller/user/index');
+const { login, signUp } = require('./controller/user/index');
 
 let db = null;
 let simpleServer = null;
@@ -25,7 +25,7 @@ try {
 
   simpleServer.route({
     method: 'POST',
-    path: '/todo',
+    path: '/todos',
     middlewares: [],
     handler: createTodo
   });
@@ -39,7 +39,7 @@ try {
   simpleServer.route({
     method: 'POST',
     path: '/signup',
-    handler: signup
+    handler: signUp
   });
 
   simpleServer.start(8000);
@@ -50,9 +50,9 @@ try {
       console.log('connected successfully to DB');
 
       // initialise model
-       init()
-       .then()
-       .catch()
+      //  init()
+      //  .then()
+      //  .catch()
     })
     .catch((error) => {
       console.log(error);

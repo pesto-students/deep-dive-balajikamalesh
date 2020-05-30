@@ -1,5 +1,10 @@
-module.exports = function ({ request, response }) {
-    //validate username and password and send flag
-    response.json({ status: 200, result: 'OK' });
-  }
-  
+const { User } = require('../../models');
+
+async function login({ request, response }) {
+  //
+  // insertOne sample
+  let result = await User.insertOne({});
+  response.json({ status: 200, result: 'OK' });
+}
+
+module.exports = { login };
