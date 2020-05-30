@@ -1,4 +1,4 @@
 module.exports = function ({ request, response }) {
-  console.log(request.params);
+  //get object from request and create todo
   response.json({ status: 200, result: 'OK' });
 }

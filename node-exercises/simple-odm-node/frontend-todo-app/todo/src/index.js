@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Router } from "@reach/router";
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <SignUp path="/" default/>
+    <SignIn path="/signin" />
+    <App path="/todo"/>
+   </Router>,
   document.getElementById('root')
 );
 

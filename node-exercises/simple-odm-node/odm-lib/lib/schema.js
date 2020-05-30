@@ -1,4 +1,3 @@
-
 class Schema {
   constructor(fieldsObj) {
     this.fields = fieldsObj

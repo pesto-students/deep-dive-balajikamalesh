@@ -1,3 +1,4 @@
+//Connect to db instance using client.js and attach db to global CLIENT
 const MongoClient = require('./client');
 
 const Connect = function(url, options) {

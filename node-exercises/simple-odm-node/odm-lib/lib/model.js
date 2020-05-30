@@ -35,23 +35,18 @@ class Model {
   async insertOne(doc) {
 
     // validate schema
-    // this._schema properties type should be similar to doc types
-
-    
+    validateSchema(this._schema.fields,doc);
     // check _id exists in doc ,if yes , cast it to toObjectId()
     doc = castIds(doc);
-
     await this.preSaveHook();
-
     const { result } = await mongoClient().insertOne({ collectionName: this.collectionName, doc });
-
     await this.postSaveHook();
-
     return result;
   }
 
   async replaceOne({ query, doc, config }) {
     // validate schema
+    validateSchema(this._schema.fields,doc);
     // check _id exists in doc ,if yes , cast it to toObjectId()
     query = castIds(query);
     doc = castIds(doc);
