@@ -1,8 +1,6 @@
 const ObjectId = require('mongodb').ObjectId;
+const { isType,isObject } = require('./validate');
 
-const isObject = (obj) => {
-  return obj != null && obj.constructor.name === 'Object';
-};
 
 const isArray = (arr) => {
   return Array.isArray(arr);
@@ -45,10 +43,22 @@ const castIds = function(query) {
   return query;
 };
 
+const validateSchema = function(schemaFields, object) {
+  for(let column in schemaFields){
+    let isValidField = schemaFields[column].required 
+                       && object[column] !== undefined 
+                       && isType(object[column],schemaFields[column].type);
+    if(!isValidField) {
+      throw new Error('Object Schema mismatch');
+    }
+  }
+}
+
 module.exports = {
   isArray,
   isString,
   deepTraverse,
   toObjectId,
-  castIds
+  castIds,
+  validateSchema
 };

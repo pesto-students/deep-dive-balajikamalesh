@@ -1,4 +1,4 @@
-
+//Validate to call connect before performing operations
 const validateMongoClient = (client)=> {
   if (client === null || client === undefined) {
       throw new Error('First call "connect" before doing operations');
