@@ -1,29 +1,39 @@
-// const { Schema, Model } = require('../odm-lib');
+const { Schema, Model } = require('../../odm-lib');
 
-// //type - Array , Object , Number , Date 
+//type - Array , Object , Number , Date 
 
-// const todoSchema = new Schema({
-//   task: { type: 'string', required: true,default:"start running" },
-//   is_done: { type: 'boolean', required: true, default: false },
-// });
+const userSchema = new Schema({
+  task: { type: 'string', required: true,default:"start running" },
+  is_done: { type: 'boolean', required: true, default: false },
+});
 
-// todoSchema.postSave = function() {
-//   console.log('post');
-//   return true
-// };
+userSchema.postSave = function() {
+  console.log('post');
+  return true
+};
 
-// todoSchema.preSave = function() {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(()=>{
-//       console.log("pre")
-//       resolve('pre')
-//     },2000)
-//   })
-// };
+userSchema.preSave = function() {
+  return new Promise((resolve, reject) => {
+    setTimeout(()=>{
+      console.log("pre")
+      resolve('pre')
+    },2000)
+  })
+};
+
+let userModel = null;
+
+function User() {
+   userModel ? userModel : userModel = new Model('todo', todoSchema);
+   return userModel
+}
+
+module.exports = { User };
+
 
 // async function init() {
 //   try {
-//     const todoModel = new Model('todo', todoSchema);
+//     const todoModel = 
 
 //     // insertOne sample
 //     // let result = await todoModel.insertOne({ task: 'Buy mobile', is_done: false,});

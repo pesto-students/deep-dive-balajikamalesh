@@ -1,9 +1,6 @@
 const ObjectId = require('mongodb').ObjectId;
-const { isType } = require('./validate');
+const { isType,isObject } = require('./validate');
 
-const isObject = (obj) => {
-  return obj != null && obj.constructor.name === 'Object';
-};
 
 const isArray = (arr) => {
   return Array.isArray(arr);
