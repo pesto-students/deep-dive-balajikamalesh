@@ -17,8 +17,8 @@ const isObject = (obj) => {
 };
 
 const isDate = (date) => {
-  return true;
-};
+  return (new Date(date) !== "Invalid Date" && !isNaN(new Date(date)) ) ? true : false;
+}
 
 const isArray = function(a) {
   return Array.isArray(a);
