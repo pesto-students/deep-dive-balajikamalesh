@@ -24,7 +24,7 @@ userSchema.preSave = function() {
 let userModel = null;
 
 function User() {
-   userModel ? userModel : userModel = new Model('user', todoSchema);
+   userModel ? userModel : userModel = new Model('user', userSchema);
    return userModel;
 }
 
