@@ -50,9 +50,9 @@ try {
       console.log('connected successfully to DB');
 
       // initialise model
-      //  init()
-      //  .then()
-      //  .catch()
+       init()
+       .then()
+       .catch()
     })
     .catch((error) => {
       console.log(error);

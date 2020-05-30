@@ -36,7 +36,7 @@ class Model {
     validateSchema(this._schema.fields, doc);
     // check _id exists in doc ,if yes , cast it to toObjectId()
     doc = castIds(doc);
-    doc = setDefaults(doc);
+    // doc = setDefaults(doc);
     await this.preSaveHook();
     const { result } = await mongoClient().insertOne({ collectionName: this.collectionName, doc });
     await this.postSaveHook();
