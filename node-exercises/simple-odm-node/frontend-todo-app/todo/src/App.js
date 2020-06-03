@@ -5,6 +5,7 @@ import './App.css';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
 import { navigate } from '@reach/router';
+import axios from 'axios';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -28,6 +29,7 @@ function App() {
   }
 
   let removeTodo = (id) => {
+    debugger;
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
