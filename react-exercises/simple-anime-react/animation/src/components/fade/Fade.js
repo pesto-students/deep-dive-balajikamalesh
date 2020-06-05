@@ -1,14 +1,14 @@
 import React from 'react';
-import './Slide.css'
+import './Fade.css'
 
-const Slide = (props) => {
+const Fade = (props) => {
     return (
         <React.Fragment>
-            <div style={{ animation: 'slidein 3s linear 1s 1 alternate' }}>
+            <div style={{ animation: 'fadein 3s linear 1s 1 alternate' }}>
                 {props.children}
             </div>
         </React.Fragment>
     );
 }
 
-export default Slide;
+export default Fade;
