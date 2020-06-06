@@ -6,7 +6,7 @@ import Fade from './components/fade/Fade';
 function App() {
   return (
     <div className="App">
-      <Slide>
+      <Slide animationType="slidein" duration="2s" iterate="1">
         <div>check</div>
       </Slide>
       <Fade>

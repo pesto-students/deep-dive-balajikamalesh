@@ -1,9 +1,13 @@
 @keyframes slidein {
-    from {
-        transform: scaleX(0);
+    0% {
+        opacity: 1;
     }
 
-    to {
-        transform: scaleX(1);
+    70% {
+        transform: translateY(100px);
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }
