@@ -7,12 +7,15 @@ function App() {
   return (
     <div className="App">
       <div style={{ height: '50%' }}>
-        <Slide animationType="slidein" duration="2s" iterate="1" delay="1s">
-          <div>check</div>
+        <Slide animationType="slidein" duration="2s" iterate="infinite" delay="1s">
+          <div>Slide</div>
         </Slide>
       </div>
+      <Fade animationType="fadeout">
+        <div>Fade Out</div>
+      </Fade>
       <Fade>
-        <div>check</div>
+        <div>Fade In</div>
       </Fade>
     </div>
   );
