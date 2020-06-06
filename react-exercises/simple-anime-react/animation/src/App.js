@@ -13,8 +13,14 @@ function App() {
       </div>
 
       <div className="parent-content">
-        <Slide animationType="slidedown" duration="2" iterate="infinite" delay="1">
+        <Slide animationType="slideDown" duration="2" iterate="infinite" delay="1">
           <div className="child-content">Slide Down</div>
+        </Slide>
+      </div>
+
+      <div className="parent-content" style={{ marginTop: '15%' }}>
+        <Slide animationType="slideUp" duration="2" iterate="infinite" delay="1">
+          <div className="child-content">Slide Up</div>
         </Slide>
       </div>
 

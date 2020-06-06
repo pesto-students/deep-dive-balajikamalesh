@@ -12,10 +12,10 @@ const Slide = (props) => {
         }
     }
     validateProps();
-    const animationsList = ["slidedown", "slideout", 'slideRight'];
+    const animationsList = ["slideDown", "slideUp", 'slideRight'];
     const animationType = animationsList.includes(props.animationType)
         ? props.animationType
-        : "slidedown";
+        : "slideDown";
     const delay = props.delay ? `${props.delay}s` : '1s';
     const duration = props.duration ? `${props.duration}s` : '2s';
     const iterate = props.iterate ? props.iterate : '1';
