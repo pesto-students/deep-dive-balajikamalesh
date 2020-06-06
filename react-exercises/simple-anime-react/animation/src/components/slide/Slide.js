@@ -13,8 +13,8 @@ const Slide = (props) => {
     }
     validateProps();
     const animationsList = ["slideDown", "slideUp", 'slideRight'];
-    const animationType = animationsList.includes(props.animationType)
-        ? props.animationType
+    const type = animationsList.includes(props.type)
+        ? props.type
         : "slideDown";
     const delay = props.delay ? `${props.delay}s` : '1s';
     const duration = props.duration ? `${props.duration}s` : '2s';
@@ -25,7 +25,7 @@ const Slide = (props) => {
         <React.Fragment>
             <div
                 style={{
-                    animation: `${animationType} ${duration} ${timimgFn} ${delay} forwards ${iterate}`,
+                    animation: `${type} ${duration} ${timimgFn} ${delay} forwards ${iterate}`,
                     height: "100%",
                     width: "100%",
                 }}
