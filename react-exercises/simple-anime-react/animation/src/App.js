@@ -6,11 +6,18 @@ import Fade from './components/fade/Fade';
 function App() {
   return (
     <div className="App">
-      <div style={{ height: '50%' }}>
-        <Slide animationType="slideinLeft" duration="2" iterate="1" delay="1">
-          <div>Slide</div>
+      <div className="parent-content">
+        <Slide animationType="slideRight" duration="2" iterate="infinite" delay="1">
+          <div className="child-content">Slide Right</div>
         </Slide>
       </div>
+
+      <div className="parent-content">
+        <Slide animationType="slidedown" duration="2" iterate="infinite" delay="1">
+          <div className="child-content">Slide Down</div>
+        </Slide>
+      </div>
+
       <Fade animationType="fadeout">
         <div>Fade Out</div>
       </Fade>
