@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <div style={{ height: '50%' }}>
-        <Slide animationType="slidein" duration="2s" iterate="infinite" delay="1s">
+        <Slide animationType="slideinLeft" duration="2" iterate="1" delay="1">
           <div>Slide</div>
         </Slide>
       </div>

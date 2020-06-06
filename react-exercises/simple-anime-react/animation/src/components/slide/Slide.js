@@ -2,12 +2,22 @@ import React from "react";
 import "./Slide.css";
 
 const Slide = (props) => {
-    const animationsList = ["slidein", "slideout"];
+    const validateProps = () => {
+        if (props.delay && isNaN(parseFloat(props.delay))) {
+            throw new TypeError(`Expected a number, got ${typeof props.delay}`)
+        } else if (props.duration && isNaN(parseFloat(props.duration))) {
+            throw new TypeError(`Expected a number, got ${typeof props.duration}`)
+        } else if (props.iterate && isNaN(props.iterate) && props.iterate !== 'infinite') {
+            throw new TypeError(`Expected a number, got ${typeof props.duration}`)
+        }
+    }
+    validateProps();
+    const animationsList = ["slidein", "slideout", 'slideinLeft'];
     const animationType = animationsList.includes(props.animationType)
         ? props.animationType
         : "slidein";
-    const delay = props.delay ? props.delay : '1s';
-    const duration = props.duration ? props.duration : '2s';
+    const delay = props.delay ? `${props.delay}s` : '1s';
+    const duration = props.duration ? `${props.duration}s` : '2s';
     const iterate = props.iterate ? props.iterate : '1';
     const timimgFn = props.timimgFn ? props.timimgFn : 'ease';
 
