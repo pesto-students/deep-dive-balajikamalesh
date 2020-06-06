@@ -6,9 +6,11 @@ import Fade from './components/fade/Fade';
 function App() {
   return (
     <div className="App">
-      <Slide animationType="slidein" duration="2s" iterate="1">
-        <div>check</div>
-      </Slide>
+      <div style={{ height: '50%' }}>
+        <Slide animationType="slidein" duration="2s" iterate="1" delay="1s">
+          <div>check</div>
+        </Slide>
+      </div>
       <Fade>
         <div>check</div>
       </Fade>

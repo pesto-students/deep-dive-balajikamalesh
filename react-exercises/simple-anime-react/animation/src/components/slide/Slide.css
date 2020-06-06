@@ -3,8 +3,8 @@
         opacity: 1;
     }
 
-    70% {
-        transform: translateY(100px);
+    50% {
+        transform: translateY(50%);
     }
 
     100% {
