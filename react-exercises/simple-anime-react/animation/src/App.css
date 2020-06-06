@@ -2,7 +2,6 @@
   text-align: center;
   height: inherit;
   display: flex;
-  flex-direction: column;
 }
 
 .App-logo {
@@ -39,6 +38,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
 }
 
 .parent-content {
