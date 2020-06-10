@@ -1,6 +1,6 @@
 .pulse {
     padding: 2%;
-    animation-iteration-count: infinite;
+    /* animation-iteration-count: infinite; */
 }
 
 @keyframes pulse{

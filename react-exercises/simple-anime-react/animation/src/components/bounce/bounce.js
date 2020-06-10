@@ -5,10 +5,12 @@ export default (props) => {
     useEffect(() => {
         var bounce = document.getElementsByClassName('bounce')[0];
         if(bounce !== undefined){
-                var ypos, start, time;
-            
-                (function drawPosition(timestamp) {
-                if (!start) { start = timestamp };
+            var ypos, start, time;
+            (function drawPosition(timestamp) {
+                if (!start) { 
+                    start = timestamp 
+                };
+                
                 time = (timestamp - start);
                 
                 if(props.decay){
