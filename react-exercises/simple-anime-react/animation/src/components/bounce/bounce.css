@@ -1,0 +1,19 @@
+.object {
+    padding: 2%;
+    animation: infinite;
+}
+
+@keyframes bounce {
+    20%, 50%, 80%, t0 {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-40px);
+    }
+    70% {
+        transform: translateY(-25px);
+    }
+    90% {
+        transform: translateY(-14px);
+    }
+}
