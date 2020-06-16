@@ -13,9 +13,13 @@ app.use(router);
 
 
 io.on('connection', (socket) => {
-    console.log('A Player has joined the game');
+    socket.on('newplayer', () => {
+        console.log('new player has joined');
+        socket.emit('createsnake');
+    });
 
     socket.on('disconnect', () => {
+        socket.emit('destroysnake');
         console.log('Player has left the game');
     })
 })

@@ -13,6 +13,13 @@ import Instructions from './components/instructions';
 import Gameover from './components/gameover';
 import pointSound from './sound/smb_coin.wav';
 import gameOverSound from './sound/smb_mariodie.wav';
+import io from 'socket.io-client';
+let socket;
+socket = io('localhost:5000');
+
+socket.emit('newplayer',() => {
+  console.log('new player joined');
+})
 
 
 const getRandomPositionForBait = () => {
